@@ -1,10 +1,12 @@
 .parent {
     width: 100%;
-    height: 100%;
+    height: 100vh;
+    max-height: 98vh;
     min-width: 100vw;
-    max-width: 100vh;
+    max-width: 100vw;
     background-color: rgb(38, 38, 38);
     color: rgb(255, 255, 255);
+    overflow-x: hidden;
 
     .header {
         width: 100vw;
@@ -15,7 +17,7 @@
         justify-content: safe;
 
         .logo {
-            width: 3.2vw;
+            width: 3.2rem;
             height: 2.5rem;
             display: flex;
             align-items: center;
@@ -28,7 +30,7 @@
         }
 
         .brand {
-            width: 8vw;
+            width: 8rem;
             height: 2.5rem;
             display: flex;
             flex-direction: column;
@@ -45,7 +47,7 @@
             justify-content: center;
             align-items: center;
 
-            button{
+            button {
                 background-color: transparent;
                 border: none;
                 cursor: pointer;
@@ -82,7 +84,7 @@
         }
 
         .profilePic {
-            width: 3.2vw;
+            width: 3.2rem;
             height: 2.5rem;
             display: flex;
             align-items: center;
@@ -97,7 +99,7 @@
         }
 
         .user-details {
-            width: 8vw;
+            width: 8rem;
             height: 2.5rem;
             display: flex;
             flex-direction: column;
@@ -112,95 +114,131 @@
         }
     }
 
-    .side-nav {
-        width: 8rem;
-        height: calc(100vh - 2.5rem);
+    .body {
+        width: 100vw;
+        height: calc(100vh - 4rem);
         display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        font-size: 0.8rem;
-        // border-right: 1px solid rgb(74, 74, 74);
-        transition: width 0.5s;
-        box-shadow: 5px 0 20px rgba(0, 0, 0, 0.1);
-
-        .svg-icon {
-            width: 1rem;
-            height: 1rem;
-            fill: rgb(255, 255, 255);
-            margin-right: 0.5rem;
-        }
-
-        .hidden{
-            display: none;
-        }
-
-        .nav-div {
+        flex-direction: row;
+        padding: 0%;
+        .side-nav {
             width: 8rem;
-            height: 15rem;
+            height: calc(100vh - 2.43rem);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            // border-right: 1px solid rgb(74, 74, 74);
+            transition: width 0.5s;
+            box-shadow: 5px 0 20px rgba(0, 0, 0, 0.1);
+
+            .nav-div {
+                width: 8rem;
+                height: 15rem;
+                padding: 0%;
+
+                .nav-list {
+                    width: 8rem;
+                    height: auto;
+                    list-style: none;
+                    padding: 0%;
+
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-start;
+                    align-items: flex-end;
+
+                    .nav-item {
+                        padding: 0%;
+                        width: 7.5rem;
+                        height: 1.5rem;
+                        text-decoration: none;
+                        margin: 0.2rem 0 0.3rem 0;
+                        cursor: pointer;
+
+                        .navlink {
+                            width: 6.8rem;
+                            height: 1.5rem;
+                            display: flex;
+                            flex-direction: row;
+                            padding-left: 5px;
+                            padding-top: 5px;
+                            text-decoration: none;
+                            /* Add this line to remove underline */
+
+                            .svg-icon {
+                                width: 1rem;
+                                height: 1rem;
+                                fill: rgb(255, 255, 255);
+                                margin-right: 0.5rem;
+                            }
+
+                            &:hover {
+                                background-color: rgb(74, 74, 74);
+                                border-radius: 5px;
+                            }
+
+                            &:active {
+                                background-color: rgb(255, 255, 255);
+                                border-radius: 5px;
+                            }
+
+                            &:visited {
+                                color: rgb(255, 255, 255);
+                            }
+                        }
+
+
+                    }
+                }
+            }
+
+            .other-div {
+                width: 8rem;
+                height: 8rem;
+
+                .nav-list {
+                    width: 8rem;
+                    height: auto;
+                    list-style: none;
+                    padding: 0%;
+
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-start;
+                    align-items: flex-end;
+
+                    .nav-item {
+                        padding: 0%;
+                        width: 7rem;
+                        height: 1.5rem;
+                        text-decoration: none;
+                        margin: 0.3rem 0 0 0;
+                        cursor: pointer;
+
+                        .navlink {
+                            height: 1.5rem;
+                            display: flex;
+                            flex-direction: row;
+
+                            .svg-icon {
+                                width: 1rem;
+                                height: 1rem;
+                                fill: rgb(255, 255, 255);
+                                margin-right: 0.5rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .main-window {
+            color: black;
+            background-color: rgb(255, 255, 255);
+            // width: 98vw;
+            width: calc(200vw - 8rem);
+            height: calc(100vh - 2.5rem);
             padding: 0%;
-
-            .nav-list {
-                width: 8rem;
-                height: 100%;
-                list-style: none;
-                padding: 0%;
-
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: flex-end;
-
-                .nav-item {
-                    padding: 0%;
-                    width: 7.2rem;
-                    height: 1.5rem;
-                    text-decoration: none;
-                    margin: 0.3rem 0 0 0;
-                    cursor: pointer;
-
-                    .navlink {
-                        height: 1.5rem;
-                        display: flex;
-                        flex-direction: row;
-
-                    }
-                }
-            }
-        }
-
-        .other-div {
-            width: 8rem;
-            height: 8rem;
-
-            .nav-list {
-                width: 8rem;
-                height: 100%;
-                list-style: none;
-                padding: 0%;
-
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: flex-end;
-
-                .nav-item {
-                    padding: 0%;
-                    width: 7rem;
-                    height: 1.5rem;
-                    text-decoration: none;
-                    margin: 0.3rem 0 0 0;
-                    cursor: pointer;
-
-                    .navlink {
-                        height: 1.5rem;
-                        display: flex;
-                        flex-direction: row;
-
-                    }
-                }
-            }
         }
     }
-
-
 }

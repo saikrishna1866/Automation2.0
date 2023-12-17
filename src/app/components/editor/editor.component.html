@@ -1,0 +1,86 @@
+<div class="parent">
+    <div [@shrinkWidth]="state" class="folder-panel">
+        <div class="row1">
+            <div class="menu-toggle">
+                <button (click)="toggleMenu()"><svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" width="100"
+                        height="100" viewBox="0 0 30 30">
+                        <path
+                            d="M 3 7 A 1 1 0 0 0 3 9 L 27 9 A 1 1 0 0 0 27 7 L 3 7 z M 3 14 A 1 1 0 0 0 3 16 L 27 16 A 1 1 0 0 0 27 14 L 3 14 z M 3 21 A 1 1 0 0 0 3 23 L 27 23 A 1 1 0 0 0 27 21 L 3 21 z" />
+                    </svg></button>
+            </div>
+            <div *ngIf="state === 'expanded'" class="create">
+                <button class="create-btn">
+                    <svg class="new-icon" fill="#000000" height="800px" width="800px" version="1.1" id="Layer_1"
+                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
+                        <path d="M256,0C114.6,0,0,114.6,0,256s114.6,256,256,256s256-114.6,256-256S397.4,0,256,0z M405.3,277.3c0,11.8-9.5,21.3-21.3,21.3
+                   h-85.3V384c0,11.8-9.5,21.3-21.3,21.3h-42.7c-11.8,0-21.3-9.6-21.3-21.3v-85.3H128c-11.8,0-21.3-9.6-21.3-21.3v-42.7
+                   c0-11.8,9.5-21.3,21.3-21.3h85.3V128c0-11.8,9.5-21.3,21.3-21.3h42.7c11.8,0,21.3,9.6,21.3,21.3v85.3H384c11.8,0,21.3,9.6,21.3,21.3
+                   V277.3z" />
+                    </svg> Create New Project</button>
+            </div>
+        </div>
+        <div *ngIf="state === 'expanded'" class="row2">
+            Code Editor
+        </div>
+        <div *ngIf="state === 'expanded'" class="row3">
+            <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="project-folder">
+                <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+                    {{node.name}}
+                </mat-tree-node>
+                <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
+                    <div class="mat-tree-node">
+                        <button
+                            style=" background-color: transparent; width: 18px; height: 18px; padding: 0%; margin-top: 0%;"
+                            mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name">
+                            <svg style="padding: 0%; margin-top: -120%;" *ngIf="treeControl.isExpanded(node)"
+                                xmlns="http://www.w3.org/2000/svg" class="mat-svg" viewBox="0 0 24 24" width="15"
+                                height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+
+                            <svg style="padding: 0%; margin-top: -120%;" *ngIf="!treeControl.isExpanded(node)"
+                                xmlns="http://www.w3.org/2000/svg" class="mat-svg" viewBox="0 0 24 24" width="15"
+                                height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+
+                        </button>
+                        {{node.name}}
+                    </div>
+                    <div [class.example-tree-invisible]="!treeControl.isExpanded(node)" role="group">
+                        <ng-container matTreeNodeOutlet></ng-container>
+                    </div>
+                </mat-nested-tree-node>
+            </mat-tree>
+        </div>
+
+    </div>
+    <div [@shrinkMain]="state" class="editor-panel">
+        <div class="editor-header">
+            <div class="opened-file">
+                <div class="fileName">
+                    <span>File Name</span>
+                </div>
+                <div class="close-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16" fill="none">
+                        <g clip-path="url(#clip0_337_1187)">
+                            <path
+                                d="M12.6663 4.2735L11.7263 3.3335L7.99967 7.06016L4.27301 3.3335L3.33301 4.2735L7.05967 8.00016L3.33301 11.7268L4.27301 12.6668L7.99967 8.94016L11.7263 12.6668L12.6663 11.7268L8.93967 8.00016L12.6663 4.2735Z"
+                                fill="white" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_337_1187">
+                                <rect width="16" height="16" fill="white" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div class="app-ace-editor" #editor></div>
+    </div>
+    
+</div>

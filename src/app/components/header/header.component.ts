@@ -19,6 +19,20 @@ import { Component, OnInit } from '@angular/core';
       transition('shrunken => expanded', [
         animate('0.2s')
       ]),
+    ]),
+    trigger('shrinkMain', [
+      state('expanded', style({
+        width: 'calc(200vw - 8rem)',
+      })),
+      state('shrunken', style({
+        width: 'calc(200vw - 2.4rem)',
+      })),
+      transition('expanded => shrunken', [
+        animate('0.2s')
+      ]),
+      transition('shrunken => expanded', [
+        animate('0.2s')
+      ]),
     ])
   ]
 })
