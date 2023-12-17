@@ -22,10 +22,10 @@ import { Component, OnInit } from '@angular/core';
     ]),
     trigger('shrinkMain', [
       state('expanded', style({
-        width: 'calc(200vw - 8rem)',
+        width: 'calc(100vw - 8rem)',
       })),
       state('shrunken', style({
-        width: 'calc(200vw - 2.4rem)',
+        width: 'calc(100vw - 2.4rem)',
       })),
       transition('expanded => shrunken', [
         animate('0.2s')

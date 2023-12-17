@@ -68,8 +68,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16" fill="none">
                         <g clip-path="url(#clip0_337_1187)">
                             <path
-                                d="M12.6663 4.2735L11.7263 3.3335L7.99967 7.06016L4.27301 3.3335L3.33301 4.2735L7.05967 8.00016L3.33301 11.7268L4.27301 12.6668L7.99967 8.94016L11.7263 12.6668L12.6663 11.7268L8.93967 8.00016L12.6663 4.2735Z"
-                                 />
+                                d="M12.6663 4.2735L11.7263 3.3335L7.99967 7.06016L4.27301 3.3335L3.33301 4.2735L7.05967 8.00016L3.33301 11.7268L4.27301 12.6668L7.99967 8.94016L11.7263 12.6668L12.6663 11.7268L8.93967 8.00016L12.6663 4.2735Z" />
                         </g>
                         <defs>
                             <clipPath id="clip0_337_1187">
@@ -80,7 +79,14 @@
                 </div>
             </div>
         </div>
-        <div class="app-ace-editor" #editor></div>
+        <div [@shrinkMain]="state"  class="app-ace-editor" #editor></div>
+        <div [@shrinkFooter]="state"  class="editor-footer">
+            <button class="btn">Save</button>
+            <input class="text-field" placeholder="Enter your IP" name="ip" />
+            <button class="btn">Execute</button>
+            <button class="btn">Execution in progress</button>
+            <button class="btn">Show Report</button>
+        </div>
     </div>
-    
+
 </div>

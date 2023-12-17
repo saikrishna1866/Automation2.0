@@ -196,10 +196,10 @@ const TREE_DATA: Project[] = [
     ]),
     trigger('shrinkMain', [
       state('expanded', style({
-        width: 'calc(200vw - 8rem)',
+        width: 'calc(100vw - 10rem)',
       })),
       state('shrunken', style({
-        width: 'calc(200vw - 2.4rem)',
+        width: 'calc(100vw - 2.4rem)',
       })),
       transition('expanded => shrunken', [
         animate('0.2s')
@@ -207,7 +207,22 @@ const TREE_DATA: Project[] = [
       transition('shrunken => expanded', [
         animate('0.2s')
       ]),
-    ])
+    ]),
+    trigger('shrinkFooter', [
+      state('expanded', style({
+        width: 'calc(100vw - 15rem)',
+      })),
+      state('shrunken', style({
+        width: 'calc(100vw - 2.4rem)',
+      })),
+      transition('expanded => shrunken', [
+        animate('0.6s')
+      ]),
+      transition('shrunken => expanded', [
+        animate('0.6s')
+      ]),
+    ]),
+
   ]
 })
 export class EditorComponent implements OnInit, AfterViewInit {
@@ -247,7 +262,7 @@ export class EditorComponent implements OnInit, AfterViewInit {
     });
   }
 
-  @ViewChild('editor', {static: false}) private editor: ElementRef<HTMLElement> | undefined;
+  @ViewChild('editor', { static: false }) private editor: ElementRef<HTMLElement> | undefined;
 
   private aceEditor!: ace.Ace.Editor;
 
