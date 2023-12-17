@@ -216,10 +216,10 @@ const TREE_DATA: Project[] = [
         width: 'calc(100vw - 2.4rem)',
       })),
       transition('expanded => shrunken', [
-        animate('0.6s')
+        animate('0.1s')
       ]),
       transition('shrunken => expanded', [
-        animate('0.6s')
+        animate('0.1s')
       ]),
     ]),
 

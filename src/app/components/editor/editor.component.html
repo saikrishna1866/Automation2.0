@@ -79,12 +79,19 @@
                 </div>
             </div>
         </div>
-        <div [@shrinkMain]="state"  class="app-ace-editor" #editor></div>
-        <div [@shrinkFooter]="state"  class="editor-footer">
+        <div [@shrinkMain]="state" class="app-ace-editor" #editor></div>
+        <div [@shrinkFooter]="state" class="editor-footer">
             <button class="btn">Save</button>
             <input class="text-field" placeholder="Enter your IP" name="ip" />
             <button class="btn">Execute</button>
-            <button class="btn">Execution in progress</button>
+            <button class="btn"> <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <text x="12" y="13" font-size="8" font-weight="bold" text-anchor="middle"
+                            fill="currentColor">i</text>
+                    </svg>
+                </span> Execution in progress</button>
             <button class="btn">Show Report</button>
         </div>
     </div>

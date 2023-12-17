@@ -192,6 +192,16 @@
                 width: 10rem;
                 height: 2rem;
                 border-radius: 5px;
+
+                span{
+                    padding: 0;
+                    margin: 0;
+
+                    svg{
+                        width: 12px;
+                        height: 12px;
+                    }
+                }
             }
 
             .text-field{
