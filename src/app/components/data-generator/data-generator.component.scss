@@ -1,0 +1,205 @@
+.parent {
+    margin-top: 0rem;
+    width: 100%;
+    min-width: 99.9%;
+    height: calc(100vh - 2.5rem);
+    padding: 0%;
+    color: rgb(0, 0, 0);
+    background-color: rgb(241, 244, 244);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+
+    .form-fields {
+        width: 98%;
+        min-height: 40%;
+        border-radius: 10px;
+        margin-top: 1rem;
+
+        display: flex;
+        justify-content: space-between;
+
+        .dataGenerate-fields {
+            width: 80%;
+            min-height: 100%;
+            background-color: rgb(255, 255, 255);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-self: center;
+
+            .generate-fields {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                border-radius: 10px 10px 0 0;
+
+                .header {
+                    display: flex;
+                    flex-direction: row;
+                    height: 2rem;
+                    width: 100%;
+                    border-radius: 10px 10px 0 0;
+                    justify-content: flex-start;
+                    align-items: center;
+                    border-bottom: 1px solid rgb(210, 211, 214);
+
+                    font-size: 0.8rem;
+                    font-weight: 700;
+
+                    .sno {
+                        width: 6%;
+                        border-radius: 10px 0 0 0;
+                    }
+
+                    .fieldname {
+                        width: 30%;
+                    }
+
+                    .type {
+                        width: 28%;
+                    }
+
+                    .option {
+                        width: 28%;
+                    }
+
+                    .action {
+                        width: 6%;
+                        justify-self: flex-end;
+                        justify-content: center;
+                    }
+                }
+
+                .body {
+                    display: flex;
+                    flex-direction: row;
+                    height: calc(100% - 2rem);
+                    min-height: 219px;
+                    width: 100%;
+                    border-radius: 0px 0px 10px 10px;
+                    justify-content: flex-start;
+                    align-items: center;
+                    // border-bottom: 1px solid rgb(210, 211, 214);
+                }
+
+            }
+
+
+        }
+
+        .rows-info {
+            width: 19%;
+            height: 250px;
+            background-color: rgb(255, 255, 255);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            box-sizing: border-box;
+            gap: 1.4rem;
+            padding: 20px;
+
+            font-size: 0.7rem;
+            font-weight: 800;
+
+            .rows,
+            .format {
+                width: 100%;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+
+                label {
+                    width: 6rem;
+
+                }
+
+                input {
+                    width: 6rem;
+                    height: 2rem;
+                    border-radius: 5px;
+                    border: 1px solid rgb(210, 211, 214);
+                }
+
+                select {
+                    width: 6.5rem;
+                    height: 2.2rem;
+                    border-radius: 5px;
+                    border: 1px solid rgb(210, 211, 214);
+
+                    .select {
+                        width: 100%;
+                        height: 2.2rem;
+                        border-radius: 0 0 5px 5px;
+                    }
+                }
+            }
+        }
+    }
+
+    .generate-rows {
+        width: 70%;
+        height: 8%;
+        display: flex;
+
+        align-self: flex-start;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 0.8rem;
+
+        input[type=number] {
+            border: 1.5px solid rgb(210, 211, 214);
+            width: 4rem;
+            height: 2rem;
+            border-radius: 5px;
+            background-color: transparent;
+            text-indent: 20px;
+
+            &::placeholder {
+                text-indent: 20px;
+            }
+        }
+
+        .btn {
+            // border: 1.5px solid rgb(72, 178, 255);
+            width: 5rem;
+            height: 2rem;
+            border-radius: 5px;
+            color: rgb(72, 178, 255);
+            background-color: transparent;
+            border: none;
+            font-size: 0.7rem;
+            font-weight: 700;
+            // background-color: rgb(72, 178, 255);
+        }
+    }
+
+    .generate-btns {
+        width: 70%;
+        height: 5%;
+        display: flex;
+        align-self: flex-start;
+        justify-content: center;
+        align-items: center;
+        gap: 0.8rem;
+
+
+        .btn {
+            width: 10rem;
+            height: 2.0rem;
+            background-color: rgb(72, 178, 255);
+            color: rgb(255, 255, 255);
+            border-radius: 5px;
+            border: none;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+    }
+
+}

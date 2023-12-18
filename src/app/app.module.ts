@@ -9,12 +9,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { EditorComponent } from './components/editor/editor.component';
+import { DataGeneratorComponent } from './components/data-generator/data-generator.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    EditorComponent
+    EditorComponent,
+    DataGeneratorComponent
   ],
   imports: [
     BrowserModule,
@@ -23,6 +27,9 @@ import { EditorComponent } from './components/editor/editor.component';
     MatTreeModule,
     MatIconModule,
     MatButtonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    NgSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

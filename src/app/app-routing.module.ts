@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EditorComponent } from './components/editor/editor.component';
 import { HeaderComponent } from './components/header/header.component';
+import { DataGeneratorComponent } from './components/data-generator/data-generator.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,9 @@ const routes: Routes = [
       {
         path: 'editor', component: EditorComponent
       },
+      {
+        path: 'data-generator', component: DataGeneratorComponent
+      }
     ]
   },
 

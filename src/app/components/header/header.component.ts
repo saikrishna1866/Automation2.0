@@ -11,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
         width: '8rem',
       })),
       state('shrunken', style({
-        width: '2.4rem',
+        width: '2.7rem',
       })),
       transition('expanded => shrunken', [
         animate('0.2s')
@@ -25,7 +25,7 @@ import { Component, OnInit } from '@angular/core';
         width: 'calc(100vw - 8rem)',
       })),
       state('shrunken', style({
-        width: 'calc(100vw - 2.4rem)',
+        width: 'calc(100vw - 2.7rem)',
       })),
       transition('expanded => shrunken', [
         animate('0.2s')

@@ -1,0 +1,62 @@
+<div class="parent">
+    <div class="form-fields">
+        <div class="dataGenerate-fields">
+            <div class="generate-fields">
+                <div class="header">
+                    <div class="sno">&nbsp;</div>
+                    <div class="fieldname">Field Name</div>
+                    <div class="type">Type</div>
+                    <div class="option">Option</div>
+                    <div class="action">Action</div>
+                </div>
+                <div class="body">
+                    <ng-container
+                        *ngFor="let dataGenerateField of dataGenerateFormFields().controls; let index = index">
+                        <div class="sno">&nbsp;</div>
+                        <div class="fieldname">
+                            <input placeholder="Enter Data" formControlName="inputData" />
+                        </div>
+                        <div class="type">
+                            <!--Select working on it-->
+                            <ng-select #select [items]="dataTypes" bindLabel="type" dropdownPosition="bottom" [searchable]="true" [clearable]="false" placeholder="Choose Type" [loading]="dataLoading" (search)="onSearch($event)" formControlName="selectedDataType" [searchFn]="testSearch" (change)="dataTypeSelected($event, index)">
+                                <ng-template ng-header-temp>
+                                    <div class="select-search-input">
+                                        <input class="data-type-search-input"  type="text" id="inputValidation" placeholder="Search For Data Tyoe" (input)="select.filter($any($event.target).value)" [(ngModel)]="searchInputDataType" [ngModelOptions]="{standalone: true}"/>
+                                    </div>
+                                </ng-template>
+                            </ng-select>
+                        </div>
+                        <div class="option"></div>
+                        <div class="action"></div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+        <div class="rows-info">
+            <div class="rows">
+                <label for="rows"> # Row:</label><input type="number" id="rows" placeholder="1000" name="rows" />
+            </div>
+            <div class="format">
+                <label for="format">Format:</label>
+                <select name="format" id="format">
+                    <option class="select" value="CSV">CSV</option>
+                    <option class="select" value="JSON">JSON</option>
+                    <option class="select" value="EXCEL">EXCEL</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="generate-rows">
+        <input type="number" placeholder="0" name="rows">
+        <button class="btn">Add Rows <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="10" height="10"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+        </button>
+    </div>
+    <div class="generate-btns">
+        <button class="btn">Generate Data</button><button class="btn">Derive From Example</button>
+    </div>
+
+</div>
