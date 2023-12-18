@@ -10,25 +10,7 @@
                     <div class="action">Action</div>
                 </div>
                 <div class="body">
-                    <ng-container
-                        *ngFor="let dataGenerateField of dataGenerateFormFields().controls; let index = index">
-                        <div class="sno">&nbsp;</div>
-                        <div class="fieldname">
-                            <input placeholder="Enter Data" formControlName="inputData" />
-                        </div>
-                        <div class="type">
-                            <!--Select working on it-->
-                            <ng-select #select [items]="dataTypes" bindLabel="type" dropdownPosition="bottom" [searchable]="true" [clearable]="false" placeholder="Choose Type" [loading]="dataLoading" (search)="onSearch($event)" formControlName="selectedDataType" [searchFn]="testSearch" (change)="dataTypeSelected($event, index)">
-                                <ng-template ng-header-temp>
-                                    <div class="select-search-input">
-                                        <input class="data-type-search-input"  type="text" id="inputValidation" placeholder="Search For Data Tyoe" (input)="select.filter($any($event.target).value)" [(ngModel)]="searchInputDataType" [ngModelOptions]="{standalone: true}"/>
-                                    </div>
-                                </ng-template>
-                            </ng-select>
-                        </div>
-                        <div class="option"></div>
-                        <div class="action"></div>
-                    </ng-container>
+                    
                 </div>
             </div>
         </div>
