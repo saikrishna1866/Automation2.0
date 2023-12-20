@@ -1,11 +1,11 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DataGenerationService {
+export class DatagenerationService {
 
   constructor(private http: HttpClient) { }
 
@@ -29,10 +29,11 @@ export class DataGenerationService {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       }),
-      responseType: requestBody.data_format// Type assertion to specify 'text' as the responseType
+      responseType: 'text' as 'json' // Change this to the desired type
     };
+  
     const url = `${this.baseUrl}generate_data/`;
-
+  
     return this.http.post(url, requestBody, httpOptions).pipe(
       catchError((error: HttpErrorResponse) => {
         console.error('Error occurred:', error);
@@ -40,6 +41,7 @@ export class DataGenerationService {
       })
     );
   }
+  
 
   //derive example
   deriveFromExample(requestBody: string): Observable<any> {
@@ -49,8 +51,9 @@ export class DataGenerationService {
       })
     };
     const url = `${this.baseUrl}derive_from_example/`;
-    console.log(requestBody);
+    // console.log(requestBody); 
     return this.http.post<any[]>(url, requestBody, httpOptions);
   }
+  
 
 }

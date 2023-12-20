@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { DataGenerationService } from 'src/app/services/data-generation.service';
+import { DatagenerationService } from 'src/app/services/data-service/datageneration.service';
+
 
 @Component({
   selector: 'app-data-generator',
@@ -9,15 +10,24 @@ import { DataGenerationService } from 'src/app/services/data-generation.service'
 })
 export class DataGeneratorComponent implements OnInit {
 
+  dataTypes: string[] = [];
+
+  formRows: number = 3;
+
+
+  constructor() {
+
+  }
+
   ngOnInit(): void {
-    
-  }
-
-  constructor(){
 
   }
 
-
-
-
+  increment(input: number){
+    this.formRows +=1;
+  }
+  decrement(input: number){
+    if(input < 1) return;
+    this.formRows -=1;
+  }
 }

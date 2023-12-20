@@ -227,7 +227,7 @@ const TREE_DATA: Project[] = [
 })
 export class EditorComponent implements OnInit, AfterViewInit {
 
-  constructor(private ref: ChangeDetectorRef) {
+  constructor(private ref: ChangeDetectorRef,) {
     this.dataSource.data = TREE_DATA;
   }
 

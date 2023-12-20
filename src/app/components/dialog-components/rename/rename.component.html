@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>Rename {{data.type}}</h2>
+<div mat-dialog-content>
+  <mat-form-field>
+    <input matInput [(ngModel)]="newName" (keyup)="checkDuplicate()">
+  </mat-form-field>
+  <div class="warn-msg">
+  <span style="font-size: .8rem; color: #000" *ngIf="showWarn" class="help-block">A file or folder <strong>{{newName}}</strong> already exists</span>
+</div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+  <button mat-button color="primary" [disabled]="!newName || showWarn" (click)="onSaveClick()">Ok</button>
+</div>

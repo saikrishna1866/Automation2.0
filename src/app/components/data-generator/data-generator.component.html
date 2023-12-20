@@ -1,44 +1,105 @@
 <div class="parent">
-    <div class="form-fields">
-        <div class="dataGenerate-fields">
-            <div class="generate-fields">
-                <div class="header">
-                    <div class="sno">&nbsp;</div>
-                    <div class="fieldname">Field Name</div>
-                    <div class="type">Type</div>
-                    <div class="option">Option</div>
-                    <div class="action">Action</div>
+    <form>
+        <div class="form-fields">
+            <div class="dataGenerate-fields">
+                <div class="generate-fields">
+                    <div class="header">
+                        <div class="sno">&nbsp;</div>
+                        <div class="fieldname">Field Name</div>
+                        <div class="type">Type</div>
+                        <div class="option">Option</div>
+                        <div class="action">Action</div>
+                    </div>
+                    <div class="body">
+                        <div class="row" >
+                            <div class="sno">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"
+                                    fill="none">
+                                    <path
+                                        d="M9.99996 18.3334L6.66663 15.0001H13.3333L9.99996 18.3334ZM9.99996 1.66675L13.3333 5.00008H6.66663L9.99996 1.66675ZM9.99996 11.6667C9.55793 11.6667 9.13401 11.4912 8.82145 11.1786C8.50889 10.866 8.33329 10.4421 8.33329 10.0001C8.33329 9.55805 8.50889 9.13413 8.82145 8.82157C9.13401 8.50901 9.55793 8.33341 9.99996 8.33341C10.442 8.33341 10.8659 8.50901 11.1785 8.82157C11.491 9.13413 11.6666 9.55805 11.6666 10.0001C11.6666 10.4421 11.491 10.866 11.1785 11.1786C10.8659 11.4912 10.442 11.6667 9.99996 11.6667ZM1.66663 10.0001L4.99996 6.66675V13.3334L1.66663 10.0001ZM18.3333 10.0001L15 13.3334V6.66675L18.3333 10.0001Z"
+                                        fill="black" />
+                                </svg>
+                            </div>
+                            <div class="fieldname">
+                                <input type="text" name="fieldname"
+                                    placeholder="Enter Field Name">
+                            </div>
+                            <div class="type">
+                                <select name="type" id="type">
+                                    <option class="option" *ngFor="let dt of dataTypes" [value]="dt">
+                                        <p>{{ dt }}</p>
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="option">
+                                <div class="data-options">
+                                </div>
+                            </div>
+                            <div class="action">
+                                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32"
+                                    enable-background="new 0 0 32 32" xml:space="preserve">
+                                    <path fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10"
+                                        d="M23,27H11c-1.1,0-2-0.9-2-2V8h16v17C25,26.1,24.1,27,23,27z" />
+                                    <line fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="27"
+                                        y1="8" x2="7" y2="8" />
+                                    <path fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10"
+                                        d="M14,8V6c0-0.6,0.4-1,1-1h4c0.6,0,1,0.4,1,1v2" />
+                                    <line fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="17"
+                                        y1="23" x2="17" y2="12" />
+                                    <line fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="21"
+                                        y1="23" x2="21" y2="12" />
+                                    <line fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="13"
+                                        y1="23" x2="13" y2="12" />
+                                </svg>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
-                <div class="body">
-                    
+            </div>
+            <div class="rows-info">
+                <div class="rows">
+                    <label for="rows"> # Row:</label><input type="number" id="rows" placeholder="1000" name="rows" />
+                </div>
+                <div class="format">
+                    <label for="format">Format:</label>
+                    <select name="format" id="format">
+                        <option class="select" value="CSV">CSV</option>
+                        <option class="select" value="JSON">JSON</option>
+                        <option class="select" value="EXCEL">EXCEL</option>
+                    </select>
                 </div>
             </div>
         </div>
-        <div class="rows-info">
-            <div class="rows">
-                <label for="rows"> # Row:</label><input type="number" id="rows" placeholder="1000" name="rows" />
+        <div class="generate-rows">
+            <div class="input">
+                <input type="number" placeholder="0" name="rows" [(ngModel)]="formRows">
+                <div class="arrows">
+                    <svg class="uparrow" (click)="increment(formRows)" xmlns="http://www.w3.org/2000/svg" width="13"
+                        height="23" viewBox="0 0 13 33" fill="none">
+                        <path d="M12.5 7L6.5 1L0.5 7" stroke="#282A37" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <svg class="downarrow" (click)="decrement(formRows)" xmlns="http://www.w3.org/2000/svg" width="13"
+                        height="23" viewBox="0 0 13 33" fill="none">
+                        <path d="M12.5 16L6.5 22L0.5 16" stroke="#282A37" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </div>
+
             </div>
-            <div class="format">
-                <label for="format">Format:</label>
-                <select name="format" id="format">
-                    <option class="select" value="CSV">CSV</option>
-                    <option class="select" value="JSON">JSON</option>
-                    <option class="select" value="EXCEL">EXCEL</option>
-                </select>
-            </div>
+
+            <button class="btn">Add Rows <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="10"
+                    height="10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19" />
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+            </button>
         </div>
-    </div>
-    <div class="generate-rows">
-        <input type="number" placeholder="0" name="rows">
-        <button class="btn">Add Rows <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="10" height="10"
-                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="12" y1="5" x2="12" y2="19" />
-                <line x1="5" y1="12" x2="19" y2="12" />
-            </svg>
-        </button>
-    </div>
-    <div class="generate-btns">
-        <button class="btn">Generate Data</button><button class="btn">Derive From Example</button>
-    </div>
+        <div class="generate-btns">
+            <button class="btn">Generate Data</button><button class="btn">Derive From Example</button>
+        </div>
+    </form>
 
 </div>

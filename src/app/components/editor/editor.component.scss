@@ -1,6 +1,7 @@
 .parent {
     margin-top: 0rem;
     max-width: 90.5rem;
+    // min-height: 97vh;
     height: 100%;
     padding: 0%;
     color: rgb(0, 0, 0);
@@ -14,7 +15,7 @@
         width: 10rem;
         height: 100%;
         transition: width 0.5s;
-        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+
 
         .row1 {
             display: flex;
@@ -64,7 +65,6 @@
                         width: 1rem;
                         height: 1rem;
                         fill: rgb(0, 125, 214);
-
                     }
                 }
             }
@@ -130,7 +130,7 @@
         .editor-header {
             color: rgb(0, 0, 0);
             height: 1.3rem;
-            background-color: rgb(255,255,255);
+            background-color: rgb(217, 217, 217);
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -143,21 +143,23 @@
             .opened-file {
                 min-width: 8rem;
                 height: 100%;
-                background-color: rgb(244,244,244);
+                background-color: rgb(244, 244, 244);
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 border-radius: 2px 2px 0px 0px;
 
-                span{
+                span {
                     font-size: 0.8rem;
                 }
             }
+
             .close-icon {
                 padding-left: 0.5rem;
                 padding-right: 0.3rem;
                 cursor: pointer;
-                svg{
+
+                svg {
                     fill: rgb(132, 132, 132);
                 }
             }
@@ -166,60 +168,61 @@
 
         .app-ace-editor {
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.04);
-            height: calc(100vh - 2.3rem);
+            height: calc(100vh - 2rem);
             font-size: 1rem;
             transition: width 0.2s;
         }
 
-        .editor-footer{
+        .editor-footer {
             width: 100vw;
-            height: 12%;
+            height: 10%;
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 2rem;
             transition: width 0.2s;
-            color: rgb(255,255,255);
+            color: rgb(255, 255, 255);
 
-            :nth-child(2) , :nth-child(3){
+            :nth-child(2),
+            :nth-child(3) {
                 gap: 0rem;
             }
 
-            .btn{
-                background-color: rgb(72,178,255);
-                color: rgb(255,255,255);
+            .btn {
+                background-color: rgb(72, 178, 255);
+                color: rgb(255, 255, 255);
                 border: 0;
                 width: 10rem;
                 height: 2rem;
                 border-radius: 5px;
                 font-size: 0.6rem;
 
-                &:nth-of-type(3){
-                    background-color: rgb(0,94,218);
+                &:nth-of-type(3) {
+                    background-color: rgb(0, 94, 218);
                     display: flex;
                     justify-content: center;
                     align-items: center;
                     gap: 2px;
                 }
 
-                span{
+                span {
                     position: relative;
                     top: 5%;
 
-                    svg{
+                    svg {
                         width: 12px;
                         height: 12px;
                     }
                 }
             }
 
-            .text-field{
+            .text-field {
                 border-radius: 5px;
                 width: 10rem;
                 height: 2rem;
-                border: 1px solid rgb(72,178,255);
+                border: 1px solid rgb(72, 178, 255);
 
-                &::placeholder{
+                &::placeholder {
                     text-align: center;
                 }
             }
