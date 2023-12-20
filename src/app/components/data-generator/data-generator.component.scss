@@ -61,96 +61,91 @@
                         font-weight: 700;
 
                         .sno {
-                            width: 6%;
+                            width: 5%;
                             border-radius: 10px 0 0 0;
                         }
 
                         .fieldname {
-                            width: 30%;
+                            width: 15%;
                         }
 
                         .type {
-                            width: 28%;
+                            width: 15%;
                         }
 
                         .option {
-                            width: 28%;
+                            width: 60%;
                         }
 
                         .action {
-                            width: 6%;
+                            width: 5%;
                             justify-self: flex-end;
                             justify-content: center;
                         }
                     }
 
                     .body {
+                        width: 100%;
+                        height: inherit;
+                        position: relative;
+
                         display: flex;
                         flex-direction: row;
-                        height: calc(100% - 0.1rem);
-                        min-height: 219px;
-                        width: 100%;
-                        border-radius: 0px 0px 10px 10px;
-                        justify-content: flex-start;
-                        align-items: flex-start;
-                        // border-bottom: 1px solid rgb(210, 211, 214);
-                        padding: 0%;
-                        margin: 0%;
-
-                        font-size: 0.8rem;
-                        font-weight: 700;
 
                         .row {
-                            padding: 0%;
-                            margin: 0%;
+                            display: flex;
                             width: 100%;
                             height: 2rem;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
+                            margin-top: 0.3rem;
+                            justify-content: flex-start;
 
                             .sno {
-                                width: 6%;
-                                border-radius: 10px 0 0 0;
+                                width: 5%;
+                                height: auto;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
                             }
 
                             .fieldname {
-                                width: 30%;
+                                width: 15%;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
 
                                 input {
-                                    width: 80%;
+                                    width: 95%;
+                                    height: 1.2rem;
+
                                 }
+
                             }
 
                             .type {
-                                width: 28%;
+                                width: 15%;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
 
                                 select {
-                                    width: 80%;
-                                    color: #000;
-                                }
+                                    width: 95%;
+                                    height: 1.55rem;
 
-                                .option {
-                                    color: #000;
                                 }
                             }
 
                             .option {
-                                width: 28%;
+                                width: 60%;
                             }
 
                             .action {
-                                width: 6%;
-                                justify-self: flex-end;
+                                width: 5%;
+                                display: flex;
+                                align-items: center;
                                 justify-content: center;
-
-                                svg {
-                                    width: 16px;
-                                    height: 16px;
-                                    cursor: pointer;
-                                }
                             }
                         }
+
                     }
 
                 }
@@ -194,7 +189,7 @@
                     }
 
                     select {
-                        width: 6.5rem;
+                        width: 8rem;
                         height: 2.2rem;
                         border-radius: 5px;
                         border: 1px solid rgb(210, 211, 214);
