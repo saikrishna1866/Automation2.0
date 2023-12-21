@@ -1,5 +1,5 @@
 <div class="parent">
-    <form [formGroup]="dataGenerationForm">
+    <form [formGroup]="dataGenerationForm" (ngSubmit)="onSubmit()">
         <div class="form-fields">
             <div class="dataGenerate-fields">
                 <div class="generate-fields" formArrayName="dataGenarateFormFields">
@@ -10,8 +10,8 @@
                         <div class="option">Option</div>
                         <div class="action">Action</div>
                     </div>
-                    <div class="body">
-                        <div class="row" *ngFor="let field of dataGenerationFormFields().controls; let i = index" [formGroupName]="i">
+                    <div cdkDropList (cdkDropListDropped)="drop($event)" class="body">
+                        <div class="row" cdkDrag *ngFor="let field of dataGenerationFormFields().controls; let i = index" [formGroupName]="i">
                             <div class="sno">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"
                                     fill="none">
@@ -24,19 +24,20 @@
                                 <input type="text" formControlName="inputData" name="inputData" placeholder="Enter Field Name">
                             </div>
                             <div class="type">
-                                <select formControlName="selectedDataType" id="type">
+                                <select formControlName="selectedDataType" id="type" (change)="dataTypeSelected($event, i)">
                                     <option class="option">Select</option>
                                     <option class="option" *ngFor="let dt of dataTypes" [value]="dt">
                                         <p>{{ dt }}</p>
                                     </option>
                                 </select>
+                                
                             </div>
                             <div class="option">
                                 <div class="data-options" formArrayName="dataTypeOptions">
                                     <div class="options-div" [formGroupName]="i" *ngFor="let options of getDataTypeOptionsFields(i).controls; let i=index">
                                         <input type="checkbox" class="input-checkbox" formControlName="checked"/>
                                         <ng-container *ngIf="options.value.displayTextField">
-                                            <input type="text" class="option-text" placeholder="{{options.value.label}}" formControlName="inputValue">
+                                            <input type="text" class="option-text" placeholder="{{options.value.optionValue}}" formControlName="inputValue">
                                         </ng-container>
                                     </div>
                                 </div>
@@ -55,12 +56,12 @@
             </div>
             <div class="rows-info">
                 <div class="rows">
-                    <label for="rows"> # Row:</label><input type="number" id="rows" placeholder="1000" name="rows" />
+                    <label for="rows"> # Row:</label><input type="number" id="rows" placeholder="1000" name="rows" formControlName="records" />
                 </div>
                 <div class="format">
                     <label for="format">Format:</label>
-                    <select name="format" id="format">
-                        <option class="select" value="CSV">CSV</option>
+                    <select name="format" id="format" formControlName="dataFormat">
+                        <option class="select" selected value="CSV">CSV</option>
                         <option class="select" value="JSON">JSON</option>
                         <option class="select" value="EXCEL">EXCEL</option>
                     </select>
@@ -69,13 +70,13 @@
         </div>
         <div class="generate-rows">
             <div class="input">
-                <input type="number" placeholder="0" name="rows" [(ngModel)]="formRows">
+                <input type="number" placeholder="0" name="rows" formControlName="formRows">
                 <div class="arrows">
-                    <svg class="uparrow" (click)="increment(formRows)" xmlns="http://www.w3.org/2000/svg" width="13"
+                    <svg class="uparrow" (click)="increment()" xmlns="http://www.w3.org/2000/svg" width="13"
                         height="23" viewBox="0 0 13 33" fill="none">
                         <path d="M12.5 7L6.5 1L0.5 7" stroke="#282A37" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
-                    <svg class="downarrow" (click)="decrement(formRows)" xmlns="http://www.w3.org/2000/svg" width="13"
+                    <svg class="downarrow" (click)="decrement()" xmlns="http://www.w3.org/2000/svg" width="13"
                         height="23" viewBox="0 0 13 33" fill="none">
                         <path d="M12.5 16L6.5 22L0.5 16" stroke="#282A37" stroke-linecap="round"
                             stroke-linejoin="round" />
@@ -93,7 +94,8 @@
             </button>
         </div>
         <div class="generate-btns">
-            <button class="btn">Generate Data</button><button class="btn">Derive From Example</button>
+            <button type="submit" class="btn" type="submit">Generate Data</button>
+            <button type="button" class="btn">Derive From Example</button>
         </div>
     </form>
 </div>

@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "tsc": "tsc"
   },
   "private": true,
   "dependencies": {
@@ -21,14 +22,17 @@
     "@angular/router": "~13.0.0-next.0",
     "@ng-select/ng-select": "^8.3.0",
     "ace-builds": "^1.32.2",
+    "file-saver": "^2.0.5",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
+    "xlsx": "^0.18.5",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~13.0.0",
     "@angular/cli": "~13.0.0",
     "@angular/compiler-cli": "~13.0.0-next.0",
+    "@types/file-saver": "^2.0.7",
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
     "jasmine-core": "~3.10.0",

@@ -1,6 +1,9 @@
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver'
+
 
 @Injectable({
   providedIn: 'root'
@@ -54,6 +57,55 @@ export class DatagenerationService {
     // console.log(requestBody); 
     return this.http.post<any[]>(url, requestBody, httpOptions);
   }
+
+  //Download Json
+  downloadJson(data: any) {
+    const jsonContent = JSON.stringify(data, null, 2); // Convert data to JSON string with indentation
+  
+    // Create a Blob with the JSON content
+    const blob = new Blob([jsonContent], { type: 'application/json' });
+  
+    // Trigger file download
+    const fileName = 'generatedFile.json';
+    this.saveBlobAsFile(blob, fileName); // Custom function to save blob as a file
+  }
+
+  saveBlobAsFile(blob: Blob, fileName: string) {
+    // Check if the browser supports the 'download' attribute
+    if ('download' in document.createElement('a')) {
+      // Create a link element
+      const link = document.createElement('a');
+  
+      // Set link's attributes
+      link.href = window.URL.createObjectURL(blob);
+      link.download = fileName;
+  
+      // Programmatically click the link to trigger the download
+      document.body.appendChild(link);
+      link.click();
+  
+      // Remove the link element from the document
+      document.body.removeChild(link);
+    } else {
+      // For browsers that do not support the 'download' attribute
+      const blobURL = window.URL.createObjectURL(blob);
+      window.open(blobURL); // Opens the file in a new tab if download attribute is not supported
+    }
+  }
+
+  downloadCSV(response: any) {
+    const lines = response.split('\n');
+    const csvContent = lines.join('\n');
+
+    // Convert the CSV content to a Blob
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+
+    // Trigger file download
+    const fileName = 'generatedFile.csv';
+    saveAs(blob, fileName);
+  }
+  
   
 
 }
+
