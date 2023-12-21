@@ -90,7 +90,7 @@
                         position: relative;
 
                         display: flex;
-                        flex-direction: row;
+                        flex-direction: column;
 
                         .row {
                             display: flex;
@@ -269,6 +269,7 @@
                 border: none;
                 font-size: 0.7rem;
                 font-weight: 700;
+                cursor: pointer;
                 // background-color: rgb(72, 178, 255);
             }
         }

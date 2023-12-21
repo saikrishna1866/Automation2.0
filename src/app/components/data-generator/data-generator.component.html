@@ -1,8 +1,8 @@
 <div class="parent">
-    <form>
+    <form [formGroup]="dataGenerationForm">
         <div class="form-fields">
             <div class="dataGenerate-fields">
-                <div class="generate-fields">
+                <div class="generate-fields" formArrayName="dataGenarateFormFields">
                     <div class="header">
                         <div class="sno">&nbsp;</div>
                         <div class="fieldname">Field Name</div>
@@ -11,7 +11,7 @@
                         <div class="action">Action</div>
                     </div>
                     <div class="body">
-                        <div class="row">
+                        <div class="row" *ngFor="let field of dataGenerationFormFields().controls; let i = index" [formGroupName]="i">
                             <div class="sno">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"
                                     fill="none">
@@ -21,10 +21,10 @@
                                 </svg>
                             </div>
                             <div class="fieldname">
-                                <input type="text" name="fieldname" placeholder="Enter Field Name">
+                                <input type="text" formControlName="inputData" name="inputData" placeholder="Enter Field Name">
                             </div>
                             <div class="type">
-                                <select name="type" id="type">
+                                <select formControlName="selectedDataType" id="type">
                                     <option class="option">Select</option>
                                     <option class="option" *ngFor="let dt of dataTypes" [value]="dt">
                                         <p>{{ dt }}</p>
@@ -32,11 +32,17 @@
                                 </select>
                             </div>
                             <div class="option">
-                                <div class="data-options">
+                                <div class="data-options" formArrayName="dataTypeOptions">
+                                    <div class="options-div" [formGroupName]="i" *ngFor="let options of getDataTypeOptionsFields(i).controls; let i=index">
+                                        <input type="checkbox" class="input-checkbox" formControlName="checked"/>
+                                        <ng-container *ngIf="options.value.displayTextField">
+                                            <input type="text" class="option-text" placeholder="{{options.value.label}}" formControlName="inputValue">
+                                        </ng-container>
+                                    </div>
                                 </div>
                             </div>
                             <div class="action">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
+                                <svg (click)="removeRow(i)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
                                     fill="none">
                                     <path
                                         d="M6.66675 3.49992V3.66659H9.33342V3.49992C9.33342 3.1463 9.19294 2.80716 8.94289 2.55711C8.69284 2.30706 8.3537 2.16659 8.00008 2.16659C7.64646 2.16659 7.30732 2.30706 7.05727 2.55711C6.80722 2.80716 6.66675 3.1463 6.66675 3.49992ZM5.83342 3.66659V3.49992C5.83342 2.92528 6.06169 2.37418 6.46802 1.96785C6.87435 1.56153 7.42545 1.33325 8.00008 1.33325C8.57472 1.33325 9.12582 1.56153 9.53215 1.96785C9.93847 2.37418 10.1667 2.92528 10.1667 3.49992V3.66659H13.9167C14.0273 3.66659 14.1332 3.71048 14.2114 3.78862C14.2895 3.86676 14.3334 3.97274 14.3334 4.08325C14.3334 4.19376 14.2895 4.29974 14.2114 4.37788C14.1332 4.45602 14.0273 4.49992 13.9167 4.49992H12.9444L12.2777 12.4519C12.2271 13.0558 11.9514 13.6186 11.5054 14.0288C11.0593 14.439 10.4754 14.6666 9.86942 14.6666H6.13075C5.52481 14.6665 4.94101 14.4389 4.49502 14.0287C4.04902 13.6185 3.7734 13.0557 3.72275 12.4519L3.05608 4.49992H2.08341C1.97291 4.49992 1.86693 4.45602 1.78879 4.37788C1.71065 4.29974 1.66675 4.19376 1.66675 4.08325C1.66675 3.97274 1.71065 3.86676 1.78879 3.78862C1.86693 3.71048 1.97291 3.66659 2.08341 3.66659H5.83342ZM4.55308 12.3823C4.58626 12.7779 4.76685 13.1466 5.05905 13.4153C5.35125 13.6841 5.73375 13.8332 6.13075 13.8333H9.86942C10.2665 13.8333 10.649 13.6842 10.9413 13.4154C11.2336 13.1467 11.4142 12.7779 11.4474 12.3823L12.1081 4.49992H3.89208L4.55308 12.3823ZM7.16675 6.74992C7.16675 6.6952 7.15597 6.64102 7.13503 6.59047C7.11409 6.53991 7.0834 6.49398 7.04471 6.45529C7.00602 6.4166 6.96008 6.38591 6.90953 6.36497C6.85898 6.34403 6.8048 6.33325 6.75008 6.33325C6.69536 6.33325 6.64118 6.34403 6.59063 6.36497C6.54008 6.38591 6.49414 6.4166 6.45545 6.45529C6.41676 6.49398 6.38607 6.53991 6.36513 6.59047C6.34419 6.64102 6.33342 6.6952 6.33342 6.74992V11.5833C6.33342 11.638 6.34419 11.6922 6.36513 11.7427C6.38607 11.7933 6.41676 11.8392 6.45545 11.8779C6.49414 11.9166 6.54008 11.9473 6.59063 11.9682C6.64118 11.9891 6.69536 11.9999 6.75008 11.9999C6.8048 11.9999 6.85898 11.9891 6.90953 11.9682C6.96008 11.9473 7.00602 11.9166 7.04471 11.8779C7.0834 11.8392 7.11409 11.7933 7.13503 11.7427C7.15597 11.6922 7.16675 11.638 7.16675 11.5833V6.74992ZM9.25008 6.33325C9.48008 6.33325 9.66675 6.51992 9.66675 6.74992V11.5833C9.66675 11.6938 9.62285 11.7997 9.54471 11.8779C9.46657 11.956 9.36059 11.9999 9.25008 11.9999C9.13957 11.9999 9.03359 11.956 8.95545 11.8779C8.87731 11.7997 8.83342 11.6938 8.83342 11.5833V6.74992C8.83342 6.51992 9.02008 6.33325 9.25008 6.33325Z"
@@ -78,7 +84,7 @@
 
             </div>
 
-            <button class="btn">Add Rows <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="10"
+            <button class="btn" (click)="addNewRow()">Add Rows <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="10"
                     height="10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                     stroke-linejoin="round">
                     <line x1="12" y1="5" x2="12" y2="19" />
@@ -90,5 +96,4 @@
             <button class="btn">Generate Data</button><button class="btn">Derive From Example</button>
         </div>
     </form>
-
 </div>
