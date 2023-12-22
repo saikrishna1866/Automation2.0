@@ -25,7 +25,7 @@
                             </div>
                             <div class="type">
                                 <select formControlName="selectedDataType" id="type" (change)="dataTypeSelected($event, i)">
-                                    <option class="option">Select</option>
+                                    <option class="option" selected>Select</option>
                                     <option class="option" *ngFor="let dt of dataTypes" [value]="dt">
                                         <p>{{ dt }}</p>
                                     </option>

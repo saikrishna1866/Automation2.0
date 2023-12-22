@@ -16,8 +16,8 @@ export class DataGeneratorComponent implements OnInit {
   //store the data types
   dataTypes: string[] = [];
 
-  //No of Rows in data generation form
-  formRows: number = 2;
+  // //No of Rows in data generation form
+  // formRows: number = 2;
 
   //Index of a particular row
   rowIndex!: number;
@@ -26,7 +26,7 @@ export class DataGeneratorComponent implements OnInit {
     dataGenarateFormFields: this.fb.array([]),
     records: new FormControl(''),
     dataFormat: new FormControl(''),
-    formRows: new FormControl(2)
+    formRows: new FormControl(4)
   })
 
 
@@ -106,7 +106,9 @@ export class DataGeneratorComponent implements OnInit {
     if (this.dataGenerationFormFields().controls.length == 1) return;
     this.dataGenerationFormFields().removeAt(i);
     if (this.dataGenerationFormFields().controls.length > i) {
-      this.formRows = i + 1;
+      const formRowsControl = this.dataGenerationForm.get('formRows') as FormControl;
+      formRowsControl.setValue(formRowsControl.value + 1);
+      // this.formRows = i + 1;
     }
   }
 
@@ -222,21 +224,21 @@ export class DataGeneratorComponent implements OnInit {
     console.log(payLoad);
 
     this.dService.generateData(payLoad).subscribe(
-      data=>{
+      data => {
         this.generateFile(data, formData.dataFormat);
       },
-      err=>{
+      err => {
         console.log('Error Occurred while generating data', err);
       }
     )
   }
 
-  generateFile(data: any, dataFormat: any){
-    if(dataFormat == 'JSON'){
+  generateFile(data: any, dataFormat: any) {
+    if (dataFormat == 'JSON') {
       console.log("Gerarate Json Triggered");
       this.dService.downloadJson(data);
     }
-    else if(dataFormat == 'CSV'){
+    else if (dataFormat == 'CSV') {
       console.log("Gerarate CSV Triggered");
       this.dService.downloadCSV(data);
     }
