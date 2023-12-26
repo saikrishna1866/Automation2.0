@@ -1,0 +1,11 @@
+<div class="deriveDateDialog">
+    <h3 mat-dialog-title class="mat-title">Create Schema from Example Data</h3>
+    <p mat-dialog-content class="mat-content">Give us a few lines of example data and we'll use AI to choose the fields for you.</p>
+    <div class="textarea-div">
+        <textarea [(ngModel)]="textArea" class="textarea-content" placeholder="Paste CSV, JSON, or XML date here ..."></textarea>
+    </div>
+    <div mat-dialog-actions class="actionButtons">
+        <button mat-button class="color-white" (click)="closeDialog()">CLOSE</button>
+        <button mat-button color="primary" (click)="submit()" class="color-white btn-submit">SUBMIT</button>
+      </div>
+</div>

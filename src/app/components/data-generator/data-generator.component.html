@@ -36,6 +36,7 @@
                                 <div class="data-options" formArrayName="dataTypeOptions">
                                     <div class="options-div" [formGroupName]="i" *ngFor="let options of getDataTypeOptionsFields(i).controls; let i=index">
                                         <input type="checkbox" class="input-checkbox" formControlName="checked"/>
+                                        <p class="label">{{options.value.label}}</p>
                                         <ng-container *ngIf="options.value.displayTextField">
                                             <input type="text" class="option-text" placeholder="{{options.value.optionValue}}" formControlName="inputValue">
                                         </ng-container>
@@ -94,8 +95,8 @@
             </button>
         </div>
         <div class="generate-btns">
-            <button type="submit" class="btn" type="submit">Generate Data</button>
-            <button type="button" class="btn">Derive From Example</button>
+            <button type="submit" class="btn">Generate Data</button>
+            <button type="button" class="btn" (click)="openDialog()">Derive From Example</button>
         </div>
     </form>
 </div>

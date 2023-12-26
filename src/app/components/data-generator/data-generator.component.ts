@@ -4,6 +4,8 @@ import { UserData } from 'src/app/model/user-data.model';
 import { DatagenerationService } from 'src/app/services/data-service/datageneration.service';
 
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { MatDialog } from '@angular/material/dialog';
+import { DeriveDataComponent } from '../dialog-components/derive-data/derive-data.component';
 
 
 @Component({
@@ -30,7 +32,7 @@ export class DataGeneratorComponent implements OnInit {
   })
 
 
-  constructor(private fb: FormBuilder, private dService: DatagenerationService) {
+  constructor(private fb: FormBuilder, private dService: DatagenerationService, private dialog: MatDialog) {
 
   }
 
@@ -72,11 +74,11 @@ export class DataGeneratorComponent implements OnInit {
   }
 
   //Generate the Data Type Form Field
-  newDataTypeOptions(option: any) {
+  newDataTypeOptions(key: string, value: string) {
     return this.fb.group({
-      label: new FormControl(option),
+      label: new FormControl(key),
       inputValue: new FormControl(''),
-      optionValue: new FormControl(option),
+      optionValue: new FormControl(value),
       checked: new FormControl(''),
       displayTextField: new FormControl(true)
     });
@@ -151,8 +153,9 @@ export class DataGeneratorComponent implements OnInit {
     const dataTypeOptionsArray = this.dataGenerationFormFields().at(index)?.get("dataTypeOptions") as FormArray;
     dataTypeOptionsArray.clear();
 
-    dataTypeOptions.forEach((option: any) => {
-      const optionsForm = this.newDataTypeOptions(option);
+    Object.entries(dataTypeOptions).forEach(([key, value]) => {
+      console.log(key, value)
+      const optionsForm = this.newDataTypeOptions(key, value);
       dataTypeOptionsArray.push(optionsForm);
     })
   }
@@ -242,5 +245,37 @@ export class DataGeneratorComponent implements OnInit {
       console.log("Gerarate CSV Triggered");
       this.dService.downloadCSV(data);
     }
+  }
+
+
+  //OpenDialog for Derive from Example:
+  openDialog(): void {
+    let dialogRef = this.dialog.open(DeriveDataComponent, {
+      width: '50rem',
+      height: '20rem',
+      position: {
+        top: '-45%',
+        left: '20%'
+      },
+      data: {},
+      disableClose: false,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      let resultLength = Object.keys(result.data_types_dict).length;
+      const formArray = this.dataGenerationForm.get('dataGenarateFormFields') as FormArray;
+      //this is to add new rows if resp has more data
+      if(formArray.length < resultLength) {
+        for(let j = resultLength; j > formArray.length; j--) {
+          this.addNewRow()
+        }
+      }
+      //this is to update fields with resp data
+      for (let i = 0; i < resultLength; i++) {
+        const fieldGroup: any = this.dataGenerationFormFields().at(i) as FormGroup;
+        fieldGroup.get('inputData').setValue(Object.keys(result.data_types_dict)[i]);
+        fieldGroup.get('selectedDataType').setValue(result.data_types_dict[Object.keys(result.data_types_dict)[i]]);
+      }
+    });
   }
 }

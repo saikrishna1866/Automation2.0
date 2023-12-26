@@ -20,6 +20,8 @@ import { NewFileComponent } from './components/dialog-components/new-file/new-fi
 import { NewFolderComponent } from './components/dialog-components/new-folder/new-folder.component';
 import { RenameComponent } from './components/dialog-components/rename/rename.component';
 import { HttpClientModule } from '@angular/common/http';
+import { DeriveDataComponent } from './components/dialog-components/derive-data/derive-data.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { HttpClientModule } from '@angular/common/http';
     DeleteComponent,
     NewFileComponent,
     NewFolderComponent,
-    RenameComponent
+    RenameComponent,
+    DeriveDataComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,8 @@ import { HttpClientModule } from '@angular/common/http';
     NgSelectModule,
     MatIconModule,
     MatFormFieldModule,
-    DragDropModule
+    DragDropModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

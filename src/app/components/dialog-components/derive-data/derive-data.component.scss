@@ -1,0 +1,72 @@
+.deriveDateDialog {
+    width: 40rem;
+    height: 20rem;
+    padding: 1rem;
+    box-sizing: border-box;
+    display: flex;
+    z-index: 4;
+    align-self: center;
+    justify-self: center;
+    background-color: rgb(255, 255, 255) !important;
+    font-size: 1rem;
+    flex-direction: column;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+
+    .mat-title {
+        font-size: 1.2rem;
+        color: #000;
+        letter-spacing: 0.0075rem;
+    }
+
+    .mat-content {
+        font-size: 0.7rem;
+        color: rgb(121, 121, 121);
+        margin-bottom: 0.8rem;
+    }
+
+    .textarea-div {
+        min-width: 90%;
+        min-height: 60%;
+        justify-content: center;
+        display: flex;
+
+        .textarea-content {
+            width: 90%;
+            height: 90%;
+            background-color: rgb(241, 244, 244);
+            border-radius: 5px;
+
+            &:focus{
+                outline: none;
+            }
+        }
+    }
+
+    .actionButtons {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        button {
+            color: rgb(255, 255, 255);
+            background-color: rgb(121, 121, 121);
+        }
+
+        .btn-submit {
+            background-color: rgb(72, 178, 255);
+            color: rgb(255, 255, 255);
+        }
+    }    
+
+}
+
+::ng-deep .mat-dialog-container {
+    background-color: white;
+  }
+  
