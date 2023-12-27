@@ -60,7 +60,7 @@ export class DatagenerationService {
 
   //Download Json
   downloadJson(data: any) {
-    const jsonContent = JSON.stringify(data, null, 2); // Convert data to JSON string with indentation
+    const jsonContent = data; // Convert data to JSON string with indentation
   
     // Create a Blob with the JSON content
     const blob = new Blob([jsonContent], { type: 'application/json' });
