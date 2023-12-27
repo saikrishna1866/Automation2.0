@@ -24,6 +24,13 @@
                                 <input type="text" formControlName="inputData" name="inputData" placeholder="Enter Field Name">
                             </div>
                             <div class="type">
+                                <!-- <ng-select #dataType [items]="dataTypes" appearance="outline" dropdownPosition="auto" [clearable]="false" [searchable]="false" placeholder="select Data type" formControlName="selectedDataType" (change)="dataTypeSelected($event, i)">
+                                <ng-template ng-header-tmp>
+                                    <div class="select-search-input">
+                                        <input type="text" class="data-type-search-input" placeholder="Search for Data Type Here" (input)="dataType.filter($any($event.target).value)">
+                                    </div>
+                                </ng-template>
+                                </ng-select> -->
                                 <select formControlName="selectedDataType" id="type" (change)="dataTypeSelected($event, i)">
                                     <option class="option" selected>Select</option>
                                     <option class="option" *ngFor="let dt of dataTypes" [value]="dt">

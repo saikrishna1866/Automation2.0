@@ -2,6 +2,9 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;500;600;700;800;900&display=swap');
 
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+
 body {
     font-family: 'Inter', sans-serif;
     margin: 0%;
@@ -9,4 +12,34 @@ body {
     scroll-behavior: smooth;
     box-sizing: border-box;
     overflow: none;
+}
+
+
+.ng-select {
+    height: 1.55rem !important;
+}
+
+.ng-select .ng-select-container{
+    border: 0;
+    height: 1.0rem !important;
+}
+
+
+.ng-select .ng-placeholder {
+    position: absolute;
+    top: 0%;
+    background-color: rgb(241, 244, 244);
+    border-radius: 5px;
+    width: 100%;
+    height: 1.55rem;
+    display: flex;
+    justify-content: flex-start;
+    text-indent: 0.8rem;
+    align-items: center;
+    color: rgb(181, 148, 127);
+}
+
+.ng-select .ng-arrow-wrapper {
+    position: relative;
+    top: -20%;
 }

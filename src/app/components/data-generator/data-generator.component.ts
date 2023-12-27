@@ -122,6 +122,7 @@ export class DataGeneratorComponent implements OnInit {
   //get selected data type from select tag
   dataTypeSelected(event: any, i: number) {
     const selectedValue: any = event.target.value;
+    // const selectedValue: any = event;
     this.rowIndex = i;
     console.log(selectedValue)
     this.getOptions(selectedValue, i);
