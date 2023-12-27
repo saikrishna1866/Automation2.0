@@ -275,6 +275,11 @@ export class DataGeneratorComponent implements OnInit {
         const fieldGroup: any = this.dataGenerationFormFields().at(i) as FormGroup;
         fieldGroup.get('inputData').setValue(Object.keys(result.data_types_dict)[i]);
         fieldGroup.get('selectedDataType').setValue(result.data_types_dict[Object.keys(result.data_types_dict)[i]]);
+        const selectedDataTypeValue = fieldGroup.get('selectedDataType').value;
+        console.log(selectedDataTypeValue);
+
+        // this.setDataTypeOptionsArrayForm(selectedDataTypeValue, i);
+        this.getOptions(selectedDataTypeValue, i);
       }
     });
   }
