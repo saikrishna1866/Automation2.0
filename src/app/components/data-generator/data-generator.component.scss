@@ -291,6 +291,12 @@
                                             }
                                         }
                                     }
+
+                                    .options-div.selected {
+                                        position: sticky;
+                                        left: 0%;
+                                        max-width: 200px; // Adjust the background color as needed
+                                    }
                                 }
                             }
 

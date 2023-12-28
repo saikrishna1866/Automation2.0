@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { UserData } from 'src/app/model/user-data.model';
 import { DatagenerationService } from 'src/app/services/data-service/datageneration.service';
 
@@ -266,8 +266,8 @@ export class DataGeneratorComponent implements OnInit {
       let resultLength = Object.keys(result.data_types_dict).length;
       const formArray = this.dataGenerationForm.get('dataGenarateFormFields') as FormArray;
       //this is to add new rows if resp has more data
-      if(formArray.length < resultLength) {
-        for(let j = resultLength; j > formArray.length; j--) {
+      if (formArray.length < resultLength) {
+        for (let j = resultLength; j > formArray.length; j--) {
           this.addNewRow()
         }
       }
@@ -284,4 +284,33 @@ export class DataGeneratorComponent implements OnInit {
       }
     });
   }
+
+  //Reordering of the option arrays
+  onCheckboxChange(index: number): void {
+    const dataTypeOptionsArray = this.getDataTypeOptionsFields(index);
+  
+    // Get the form values
+    const options = dataTypeOptionsArray.value;
+  
+    // Move the selected option to the first index
+    const selectedOptionIndex = options.findIndex((option: any) => option.checked);
+    if (selectedOptionIndex !== -1) {
+      const selectedOption = options.splice(selectedOptionIndex, 1)[0];
+      options.unshift(selectedOption);
+    }
+  
+    // Sort the remaining options based on the checkbox status
+    options.sort((a: any, b: any) => (a.checked === b.checked ? 0 : a.checked ? -1 : 1));
+  
+    // Update the FormArray with the modified values
+    dataTypeOptionsArray.patchValue(options);
+  }
+  
+  
+  //Hide label of option:
+  shouldHideLabel(options: AbstractControl): boolean {
+    return options.get('checked')?.value;
+  }
+  
+
 }
