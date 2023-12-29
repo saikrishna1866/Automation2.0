@@ -215,6 +215,15 @@ export class DataGeneratorComponent implements OnInit {
         if (options.alphanumeric) {
           options.alphanumeric = Number(options.alphanumeric);
         }
+        if(options.max_num){
+          options.max_num = Number(options.max_num);
+        }
+        if(options.min_num){
+          options.min_num = Number(options.min_num);
+        }
+        // if(options.phone_number_format){
+        //   options.min_num = Number(options.min_num);
+        // }
         userData[field.inputData] = options;
       }
     });
