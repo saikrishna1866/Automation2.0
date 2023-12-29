@@ -47,7 +47,7 @@
                                 <div class="data-options" formArrayName="dataTypeOptions">
                                     <div class="options-div" [formGroupName]="i"
                                         *ngFor="let options of getDataTypeOptionsFields(i).controls; let i=index"  [class.selected]="options.value.checked">
-                                        <input type="checkbox" class="input-checkbox" formControlName="checked"
+                                        <input type="checkbox" class="input-checkbox" formControlName="checked" (change)="onCheckboxChange(i)"
                                             />
                                         <ng-container *ngIf="!shouldHideLabel(options)">
                                             <p class="label">{{ options.value.label }}</p>

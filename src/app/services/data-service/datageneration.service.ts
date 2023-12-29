@@ -104,8 +104,5 @@ export class DatagenerationService {
     const fileName = 'generatedFile.csv';
     saveAs(blob, fileName);
   }
-  
-  
-
 }
 
