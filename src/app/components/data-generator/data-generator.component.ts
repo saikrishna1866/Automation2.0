@@ -285,26 +285,26 @@ export class DataGeneratorComponent implements OnInit {
     });
   }
 
-  //Reordering of the option arrays
-  onCheckboxChange(index: number): void {
-    const dataTypeOptionsArray = this.getDataTypeOptionsFields(index);
+  // //Reordering of the option arrays
+  // onCheckboxChange(index: number): void {
+  //   const dataTypeOptionsArray = this.getDataTypeOptionsFields(index);
   
-    // Get the form values
-    const options = dataTypeOptionsArray.value;
+  //   // Get the form values
+  //   const options = dataTypeOptionsArray.value;
   
-    // Move the selected option to the first index
-    const selectedOptionIndex = options.findIndex((option: any) => option.checked);
-    if (selectedOptionIndex !== -1) {
-      const selectedOption = options.splice(selectedOptionIndex, 1)[0];
-      options.unshift(selectedOption);
-    }
+  //   // Move the selected option to the first index
+  //   const selectedOptionIndex = options.findIndex((option: any) => option.checked);
+  //   if (selectedOptionIndex !== -1) {
+  //     const selectedOption = options.splice(selectedOptionIndex, 1)[0];
+  //     options.unshift(selectedOption);
+  //   }
   
-    // Sort the remaining options based on the checkbox status
-    options.sort((a: any, b: any) => (a.checked === b.checked ? 0 : a.checked ? -1 : 1));
+  //   // Sort the remaining options based on the checkbox status
+  //   options.sort((a: any, b: any) => (a.checked === b.checked ? 0 : a.checked ? -1 : 1));
   
-    // Update the FormArray with the modified values
-    dataTypeOptionsArray.patchValue(options);
-  }
+  //   // Update the FormArray with the modified values
+  //   dataTypeOptionsArray.patchValue(options);
+  // }
   
   
   //Hide label of option:

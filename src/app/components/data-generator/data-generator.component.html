@@ -48,13 +48,13 @@
                                     <div class="options-div" [formGroupName]="i"
                                         *ngFor="let options of getDataTypeOptionsFields(i).controls; let i=index"  [class.selected]="options.value.checked">
                                         <input type="checkbox" class="input-checkbox" formControlName="checked"
-                                            (change)="onCheckboxChange(i)" />
+                                            />
                                         <ng-container *ngIf="!shouldHideLabel(options)">
                                             <p class="label">{{ options.value.label }}</p>
                                         </ng-container>
                                         <ng-container *ngIf="options.value.displayTextField">
                                             <input type="text" class="option-text"
-                                                [placeholder]="!shouldHideLabel(options) ? options.value.optionValue :  options.value.label"
+                                                [placeholder]="options.value.optionValue"
                                                 formControlName="inputValue">
                                         </ng-container>
                                     </div>
