@@ -31,7 +31,10 @@ export class DataGeneratorComponent implements OnInit {
     formRows: new FormControl(4)
   })
 
-
+  isInputMode: boolean = false;
+  format: any = '###-###-####';
+  selectedFormat!: string;
+  
   constructor(private fb: FormBuilder, private dService: DatagenerationService, private dialog: MatDialog) {
 
   }
@@ -39,6 +42,10 @@ export class DataGeneratorComponent implements OnInit {
   ngOnInit(): void {
     this.addNewRow();
     this.loadDataType();
+  }
+
+  toggleInputMode(): void {
+    this.isInputMode = !this.isInputMode;
   }
 
   // Increase and decrease no of rows
@@ -70,7 +77,7 @@ export class DataGeneratorComponent implements OnInit {
 
   //Get Data Type options Fields
   getDataTypeOptionsFields(i: number): FormArray {
-    return this.dataGenerationFormFields().at(i).get('dataTypeOptions') as FormArray;
+        return this.dataGenerationFormFields().at(i).get('dataTypeOptions') as FormArray;
   }
 
   //Generate the Data Type Form Field
@@ -91,7 +98,7 @@ export class DataGeneratorComponent implements OnInit {
 
     if (formArray && formRowsControl) {
       const numberOfNewRows = formRowsControl.value;
-
+    
       // Ensure that the total number of rows does not exceed 99
       const remainingRowsToAdd = Math.min(99 - formArray.length, numberOfNewRows);
 
@@ -109,7 +116,7 @@ export class DataGeneratorComponent implements OnInit {
     this.dataGenerationFormFields().removeAt(i);
     if (this.dataGenerationFormFields().controls.length > i) {
       const formRowsControl = this.dataGenerationForm.get('formRows') as FormControl;
-      formRowsControl.setValue(formRowsControl.value + 1);
+      //formRowsControl.setValue(formRowsControl.value + 1);
       // this.formRows = i + 1;
     }
   }
@@ -121,8 +128,8 @@ export class DataGeneratorComponent implements OnInit {
 
   //get selected data type from select tag
   dataTypeSelected(event: any, i: number) {
-    const selectedValue: any = event.target.value;
-    // const selectedValue: any = event;
+    // const selectedValue: any = event.target.value;
+    const selectedValue: any = event;
     this.rowIndex = i;
     console.log(selectedValue)
     this.getOptions(selectedValue, i);
@@ -215,16 +222,38 @@ export class DataGeneratorComponent implements OnInit {
         if (options.alphanumeric) {
           options.alphanumeric = Number(options.alphanumeric);
         }
-        if(options.max_num){
+        if (options.max_num) {
           options.max_num = Number(options.max_num);
         }
-        if(options.min_num){
+        if (options.min_num) {
           options.min_num = Number(options.min_num);
         }
-        // if(options.phone_number_format){
-        //   options.min_num = Number(options.min_num);
-        // }
+        // Assuming options.choices is a string containing comma-separated values
+        if (options.choices) {
+          // Split the string into an array using ',' as the delimiter and trim each word
+          options.choices = options.choices.split(',').map((choice: string) => choice.trim());
+
+          // Now options.choices is an array
+          console.log(options.choices);  // Output: ["angular", "react", "python"]
+        }
+
+
         userData[field.inputData] = options;
+      }
+    });
+
+    Object.entries(userData).forEach((ele: any) => {
+      if (ele[1].data_type === 'json_array') {
+        Object.entries(userData).forEach((innerEle: any) => {
+          if (innerEle[1].data_type !== 'json_array' && innerEle[0].includes(ele[0])) {
+            if (!ele[1].fields_and_types) {
+              ele[1].fields_and_types = {};
+            }
+            ele[1].fields_and_types[innerEle[0].split('.')[1]] = innerEle[1];
+            delete userData[innerEle[0]];
+          }
+ 
+        })
       }
     });
 
@@ -236,7 +265,7 @@ export class DataGeneratorComponent implements OnInit {
 
     console.log(payLoad);
 
-    this.dService.generateData(payLoad).subscribe(
+    this.dService.generateData(JSON.stringify(payLoad)).subscribe(
       data => {
         this.generateFile(data, formData.dataFormat);
       },
@@ -283,43 +312,62 @@ export class DataGeneratorComponent implements OnInit {
       //this is to update fields with resp data
       for (let i = 0; i < resultLength; i++) {
         const fieldGroup: any = this.dataGenerationFormFields().at(i) as FormGroup;
-        fieldGroup.get('inputData').setValue(Object.keys(result.data_types_dict)[i]);
-        fieldGroup.get('selectedDataType').setValue(result.data_types_dict[Object.keys(result.data_types_dict)[i]]);
-        const selectedDataTypeValue = fieldGroup.get('selectedDataType').value;
-        console.log(selectedDataTypeValue);
+        const jsonObject = result.data_types_dict[Object.keys(result.data_types_dict)[i]]
+
+        //this if logic handles json array data
+        if (jsonObject.data_type && jsonObject.data_type === 'json_array') {
+          this.addNewRow()
+          fieldGroup.get('inputData').setValue(Object.keys(result.data_types_dict)[i]);
+          fieldGroup.get('selectedDataType').setValue(jsonObject.data_type);
+          const selectedDataTypeValue = fieldGroup.get('selectedDataType').value;
+            this.getOptions(selectedDataTypeValue, i);
+          //this is to check nested objects inside josn array data
+          const jsonFieldsLength = Object.keys(jsonObject.fields_and_types).length
+          for (let k = 0; k < jsonFieldsLength; k++) {
+            const fieldGroup: any = this.dataGenerationFormFields().at(i + 1 + k) as FormGroup;
+            fieldGroup.get('inputData').setValue(Object.keys(jsonObject.fields_and_types)[k]);
+            fieldGroup.get('selectedDataType').setValue(jsonObject.fields_and_types[Object.keys(jsonObject.fields_and_types)[k]]);
+            const selectedDataTypeValue = fieldGroup.get('selectedDataType').value;
+            this.getOptions(selectedDataTypeValue, i+1+k);
+          }
+
+        } else {
+          fieldGroup.get('inputData').setValue(Object.keys(result.data_types_dict)[i]);
+          fieldGroup.get('selectedDataType').setValue(result.data_types_dict[Object.keys(result.data_types_dict)[i]]);
+          const selectedDataTypeValue = fieldGroup.get('selectedDataType').value;
+          this.getOptions(selectedDataTypeValue, i );
+        }
+        
 
         // this.setDataTypeOptionsArrayForm(selectedDataTypeValue, i);
-        this.getOptions(selectedDataTypeValue, i);
+        
       }
     });
+  }
+
+  //Hide label of option:
+  shouldHideLabel(options: AbstractControl): boolean {
+    return options.get('checked')?.value;
   }
 
   //Reordering of the option arrays
   onCheckboxChange(index: number): void {
     const dataTypeOptionsArray = this.getDataTypeOptionsFields(index);
-  
+
     // Get the form values
     const options = dataTypeOptionsArray.value;
-  
+
     // Move the selected option to the first index
     const selectedOptionIndex = options.findIndex((option: any) => option.checked);
     if (selectedOptionIndex !== -1) {
       const selectedOption = options.splice(selectedOptionIndex, 1)[0];
       options.unshift(selectedOption);
     }
-  
+
     // Sort the remaining options based on the checkbox status
     options.sort((a: any, b: any) => (a.checked === b.checked ? 0 : a.checked ? -1 : 1));
-  
+
     // Update the FormArray with the modified values
     dataTypeOptionsArray.patchValue(options);
   }
-  
-  
-  //Hide label of option:
-  shouldHideLabel(options: AbstractControl): boolean {
-    return options.get('checked')?.value;
-  }
-  
-
 }

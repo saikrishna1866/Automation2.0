@@ -141,6 +141,7 @@
                                     &::placeholder {
                                         font-size: 0.7rem;
                                         text-indent: 0.8rem;
+                                        font-family: 'Inter', sans-serif;
                                     }
 
                                     &:focus {
@@ -165,6 +166,43 @@
                                     border: 0px;
                                     border-radius: 5px;
                                     text-indent: 0.8rem;
+                                }
+
+                                ng-template {
+                                    width: 105px;
+                                    // background-color: blue;
+                                }
+
+                                .select-search-input {
+                                    width: inherit;
+                                    padding: 0%;
+                                    margin: 0%;
+
+                                    // background-color: red;
+                                    display: flex;
+                                    justify-content: center;
+
+                                    input {
+                                        width: 113px;
+
+                                        height: 1.55rem;
+                                        background-color: rgb(241, 244, 244);
+                                        font-size: 0.7rem;
+                                        border-radius: 5px;
+                                        border: 0px solid rgb(241, 244, 244);
+                                        text-indent: 0.8rem;
+
+
+                                        &::placeholder {
+                                            font-size: 0.7rem;
+                                            text-indent: 0.8rem;
+                                        }
+
+                                        &:focus {
+                                            border: 0px solid transparent;
+                                            outline: none;
+                                        }
+                                    }
                                 }
 
 
@@ -345,10 +383,21 @@
                     }
 
                     input {
-                        max-width: 6rem;
+                        width: 6rem;
                         height: 2rem;
                         border-radius: 5px;
                         border: 1px solid rgb(210, 211, 214);
+                        text-indent: 20px;
+
+                        &::-webkit-inner-spin-button,
+                        &::-webkit-outer-spin-button {
+                            -webkit-appearance: none;
+                            margin: 0;
+                        }
+
+                        &::placeholder {
+                            text-indent: 20px;
+                        }
                     }
 
                     select {
@@ -456,6 +505,13 @@
                 border: none;
                 font-size: 0.7rem;
                 font-weight: 500;
+
+
+                &:disabled {
+                    background-color: rgb(210, 211, 214);
+                    color: rgb(241, 244, 244);
+                    cursor: not-allowed;
+                }
 
             }
         }

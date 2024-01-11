@@ -23,39 +23,58 @@
                                 </svg>
                             </div>
                             <div class="fieldname">
-                                <input type="text" formControlName="inputData" name="inputData"
+                                <input type="text" formControlName="inputData"
                                     placeholder="Enter Field Name">
                             </div>
                             <div class="type">
-                                <!-- <ng-select #dataType [items]="dataTypes" appearance="outline" dropdownPosition="auto" [clearable]="false" [searchable]="false" placeholder="select Data type" formControlName="selectedDataType" (change)="dataTypeSelected($event, i)">
+                                <ng-select #dataType [items]="dataTypes" appearance="outline" dropdownPosition="auto" [clearable]="false" [searchable]="false" placeholder="select Data type" formControlName="selectedDataType" (change)="dataTypeSelected($event, i)">
                                 <ng-template ng-header-tmp>
                                     <div class="select-search-input">
                                         <input type="text" class="data-type-search-input" placeholder="Search for Data Type Here" (input)="dataType.filter($any($event.target).value)">
                                     </div>
                                 </ng-template>
-                                </ng-select> -->
-                                <select formControlName="selectedDataType" id="type"
+                                </ng-select>
+                                <!-- <select formControlName="selectedDataType" id="type"
                                     (change)="dataTypeSelected($event, i)">
                                     <option class="option" selected>Select</option>
                                     <option class="option" *ngFor="let dt of dataTypes" [value]="dt">
                                         <p>{{ dt }}</p>
                                     </option>
-                                </select>
+                                </select> -->
 
                             </div>
                             <div class="option">
                                 <div class="data-options" formArrayName="dataTypeOptions">
                                     <div class="options-div" [formGroupName]="i"
-                                        *ngFor="let options of getDataTypeOptionsFields(i).controls; let i=index"  [class.selected]="options.value.checked">
-                                        <input type="checkbox" class="input-checkbox" formControlName="checked" (change)="onCheckboxChange(i)"
-                                            />
+                                        *ngFor="let options of getDataTypeOptionsFields(i).controls; let i=index" [class.selected]="options.value.checked">
+                                        <input type="checkbox" class="input-checkbox" formControlName="checked" (change)="onCheckboxChange(i)" />
                                         <ng-container *ngIf="!shouldHideLabel(options)">
                                             <p class="label">{{ options.value.label }}</p>
                                         </ng-container>
-                                        <ng-container *ngIf="options.value.displayTextField">
+                                        <ng-container *ngIf="options.value.displayTextField && options.value.label !== 'Phone Number Format'">
                                             <input type="text" class="option-text"
-                                                [placeholder]="options.value.optionValue"
+                                                placeholder="{{options.value.optionValue}}"
                                                 formControlName="inputValue">
+                                        </ng-container>
+                                        <ng-container *ngIf="options.value.displayTextField && options.value.label === 'Phone Number Format'">
+                                            <div *ngIf="!isInputMode; else inputField" (focusout)="toggleInputMode()">
+                                                <select name="format" class="option-text" formControlName="inputValue">
+                                                    <option class="select" selected value="###-###-####">###-###-####</option>
+                                                    <option class="select" selected value="(###) ###-####">(###) ###-####</option>
+                                                    <option class="select" selected value="### ### ####">### ### ####</option>
+                                                    <option class="select" selected value="+# ### ### ####">+# ### ### ####</option>
+                                                    <option class="select" selected value="+# (###) ### ####">+# (###) ### ####</option>
+                                                    <option class="select" selected value="+#-###-###-####">+#-###-###-####</option>
+                                                    <option class="select" selected value="+#-(###)-###-####">+#-(###)-###-####</option>
+                                                    <option class="select" selected value="#-(###)###-####">#-(###)###-####</option>
+                                                    <option class="select" selected value="##########">##########</option>
+                                                </select>
+                                            </div>
+                                        
+                                            <ng-template #inputField>
+                                                <input type="text" class="option-text" placeholder="Search or Enter value" formControlName="inputValue"
+                                                    (blur)="toggleInputMode()">
+                                            </ng-template>
                                         </ng-container>
                                     </div>
                                 </div>
@@ -113,7 +132,9 @@
             </button>
         </div>
         <div class="generate-btns">
-            <button type="submit" class="btn">Generate Data</button>
+            <!-- <button type="submit" class="btn">Generate Data</button> -->
+            <button type="submit" class="btn" [disabled]="!dataGenerationForm.get('records')?.value || !dataGenerationForm.get('dataFormat')?.value">Generate Data</button>
+
             <button type="button" class="btn" (click)="openDialog()">Derive From Example</button>
         </div>
     </form>
